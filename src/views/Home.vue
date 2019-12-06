@@ -32,7 +32,7 @@
       <button @click="clearData()">Clear both</button>
     </div>
 
-    <div class="flex" style="margin-top: 32px">
+    <div class="flex" style="margin-top: 32px; background-color: rgba(255,0,0,0.05)">
       <div class="flex" style="flex-wrap: wrap; background-color: rgba(0,0,0,0.05)">
         <h3 style="width: 100%; flex-shrink: 0">Person 1</h3>
         <div style="width: 50%; padding: 16px;">
@@ -202,7 +202,7 @@
         </div>
       </div>
 
-      <div style="width: 35%; padding: 0 16px; background-color: rgba(255,0,0,0.05)">
+      <div style="width: 35%; padding: 0 16px;">
         <h3 style="width: 100%; flex-shrink: 0">Diff (using {{ diffType }})</h3>
         <div v-if="diffType === 'deep-diff'">
           <code>
@@ -212,7 +212,7 @@
           </code>
         </div>
 
-        <div v-if="diffType === 'return-deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+        <div v-if="diffType === 'return-deep-diff'">
           <code>
             <pre>
 {{ deepDiff() }}
@@ -220,7 +220,7 @@
           </code>
         </div>
 
-        <div v-if="diffType ===  'deep-object-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+        <div v-if="diffType ===  'deep-object-diff'">
           <code style="margin-bottom: 16px">
             <h3>diff</h3>
             <pre>
@@ -384,7 +384,7 @@ $color: rgb(56, 0, 102);
 
   button {
     padding: 8px 16px;
-    font-size: 13px;
+    font-size: 0.9em;
     background-color: transparent;
     border-radius: 4px;
     border: 1px solid rgba($color, .1);
@@ -424,6 +424,7 @@ $color: rgb(56, 0, 102);
   body {
     padding: 0;
     margin: 0;
+    font-size: 11px;
   }
 
   * {
