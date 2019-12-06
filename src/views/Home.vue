@@ -8,7 +8,7 @@
 
     <div v-if="diffType === 'deep-diff'">
       <h1>Deep diff</h1>
-      <a href="https://www.npmjs.com/packnumber/deep-diff">npmjs.com/deep-diff</a>
+      <a href="https://www.npmjs.com/package/deep-diff">npmjs.com/deep-diff</a>
     </div>
 
     <div v-if="diffType === 'deep-object-diff'">
@@ -44,17 +44,27 @@
             </div>
             <div class="divisor">
               <h2>Lista de amigos</h2>
-              <div class="group" v-for="friend in person1.friends">
+              <div class="group" v-for="(friend, index) in person1.friends">
                 <div class="field">
-                <label for>Nome do amigo</label>
-                <input type="text" v-model="friend.name" />
-                <!-- {{ person1.friends }} -->
-              </div>
-              <div class="field">
-                <label for>Idade do amigo</label>
-                <input type="text" v-model="friend.age" />
-                <!-- {{ person1.friends }} -->
-              </div>
+                  <label for>Nome do amigo</label>
+                  <input type="text" v-model="friend.name" />
+                  <!-- {{ person1.friends }} -->
+                </div>
+                <div class="field">
+                  <label for>Idade do amigo</label>
+                  <input type="text" v-model="friend.age" />
+                  <!-- {{ person1.friends }} -->
+                </div>
+                <div>
+                  <h2>Jogos que amigo já jogou</h2>
+                  <div class="group" v-for="game in friend.games">
+                    <div class="field">
+                      <label for>Nome do jogo</label>
+                      <input type="text" v-model="game.name" />
+                    </div>
+                  </div>
+                  <button type="button" @click="addFriendGame('person1', index)">adicionar jogo já jogado do amigo</button>
+                </div>
               </div>
               <button type="button" @click="addFriend('person1')">adicionar amigo</button>
             </div>
@@ -118,17 +128,27 @@
             </div>
             <div class="divisor">
               <h2>Lista de amigos</h2>
-              <div class="group" v-for="friend in person2.friends">
+              <div class="group" v-for="(friend, index) in person2.friends">
                 <div class="field">
-                <label for>Nome do amigo</label>
-                <input type="text" v-model="friend.name" />
-                <!-- {{ person2.friends }} -->
-              </div>
-              <div class="field">
-                <label for>Idade do amigo</label>
-                <input type="text" v-model="friend.age" />
-                <!-- {{ person2.friends }} -->
-              </div>
+                  <label for>Nome do amigo</label>
+                  <input type="text" v-model="friend.name" />
+                  <!-- {{ person2.friends }} -->
+                </div>
+                <div class="field">
+                  <label for>Idade do amigo</label>
+                  <input type="text" v-model="friend.age" />
+                  <!-- {{ person2.friends }} -->
+                </div>
+                <div>
+                  <h2>Jogos que amigo já jogou</h2>
+                  <div class="group" v-for="game in friend.games">
+                    <div class="field">
+                      <label for>Nome do jogo</label>
+                      <input type="text" v-model="game.name" />
+                    </div>
+                  </div>
+                  <button type="button" @click="addFriendGame('person2', index)">adicionar jogo já jogado do amigo</button>
+                </div>
               </div>
               <button type="button" @click="addFriend('person2')">adicionar amigo</button>
             </div>
@@ -215,7 +235,7 @@
         </code>
       </div>
 
-    </div> 
+    </div>
 
   </div>
 </template>
@@ -229,10 +249,10 @@ export default {
   name: 'home',
   data: () => ({
     birth: '1989-06-03',
-    diffType: 'deep-object-diff',
+    diffType: 'deep-diff',
     person1: {
       name: '',
-      number: 0,
+      number: '0',
       birthdate: new Date(),
       friends: [],
       player: {
@@ -242,7 +262,7 @@ export default {
     },
     person2: {
       name: '',
-      number: 0,
+      number: '0',
       birthdate: new Date(),
       friends: [],
       player: {
@@ -303,12 +323,20 @@ export default {
       this[person].friends.push(
         {
           name: '',
-          age: 18,
+          age: '18',
+          games: []
         },
       );
     },
     addGame(person) {
       this[person].player.games.push(
+        {
+          name: '',
+        },
+      );
+    },
+    addFriendGame(person, i) {
+      this[person].friends[i].games.push(
         {
           name: '',
         },

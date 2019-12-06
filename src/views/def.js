@@ -6,10 +6,16 @@ export const def = {
     {
       name: 'Leticia Garcia',
       age: '26',
+      games: [
+        {
+          name: 'Life is Strange',
+        },
+      ],
     },
     {
       name: 'Beatriz',
       age: '0',
+      games: [],
     },
   ],
   player: {
