@@ -43,7 +43,7 @@
               <input type="date" v-model="birth" @change="setBirthdate('person1')"/>
             </div>
             <div class="divisor">
-              <h2>Lista de amigos</h2>
+              <h3>Lista de amigos</h3>
               <div class="group" v-for="(friend, index) in person1.friends">
                 <div class="field">
                   <label for>Nome do amigo</label>
@@ -55,8 +55,8 @@
                   <input type="text" v-model="friend.age" />
                   <!-- {{ person1.friends }} -->
                 </div>
-                <div>
-                  <h2>Jogos que amigo já jogou</h2>
+                <div style="margin-top: 48px">
+                  <h3>Jogos que {{ friend.name || 'amigo' }} já jogou</h3>
                   <div class="group" v-for="game in friend.games">
                     <div class="field">
                       <label for>Nome do jogo</label>
@@ -69,7 +69,7 @@
               <button type="button" @click="addFriend('person1')">adicionar amigo</button>
             </div>
             <div class="divisor">
-              <h2>Jogos que já jogou</h2>
+              <h3>Jogos que {{ person1.name || 'pessoa' }} já jogou</h3>
               <div class="group" v-for="game in person1.player.games">
                 <div class="field">
                   <label for>Nome do jogo</label>
@@ -79,7 +79,7 @@
               <button type="button" @click="addGame('person1')">adicionar jogo já jogado</button>
             </div>
             <div class="divisor">
-              <h2>Consoles bonitos</h2>
+              <h3>Consoles bonitos</h3>
               <div class="group" v-for="cons in person1.player.consoles">
                 <div class="field" >
                   <select name="" id="" v-model="cons.name">
@@ -127,7 +127,7 @@
               <input type="date" v-model="birth" @change="setBirthdate('person2')"/>
             </div>
             <div class="divisor">
-              <h2>Lista de amigos</h2>
+              <h3>Lista de amigos</h3>
               <div class="group" v-for="(friend, index) in person2.friends">
                 <div class="field">
                   <label for>Nome do amigo</label>
@@ -139,8 +139,8 @@
                   <input type="text" v-model="friend.age" />
                   <!-- {{ person2.friends }} -->
                 </div>
-                <div>
-                  <h2>Jogos que amigo já jogou</h2>
+                <div style="margin-top: 48px">
+                  <h3>Jogos que {{ friend.name || 'amigo' }} já jogou</h3>
                   <div class="group" v-for="game in friend.games">
                     <div class="field">
                       <label for>Nome do jogo</label>
@@ -153,7 +153,7 @@
               <button type="button" @click="addFriend('person2')">adicionar amigo</button>
             </div>
             <div class="divisor">
-              <h2>Jogos que já jogou</h2>
+              <h3>Jogos que {{ person2.name || 'pessoa' }} já jogou</h3>
               <div class="group" v-for="game in person2.player.games">
                 <div class="field">
                   <label for>Nome do jogo</label>
@@ -163,7 +163,7 @@
               <button type="button" @click="addGame('person2')">adicionar jogo já jogado</button>
             </div>
             <div class="divisor">
-              <h2>Consoles bonitos</h2>
+              <h3>Consoles bonitos</h3>
               <div class="group" v-for="cons in person2.player.consoles">
                 <div class="field" >
                   <select name="" id="" v-model="cons.name">
@@ -390,6 +390,14 @@ export default {
     margin-bottom: 32px;
     display: inline-block;
     text-align: left;
+
+    .group > & {
+      margin: 0;
+
+      & + .field {
+        margin-top: 32px
+      }
+    }
 
     label {
       font-size: 1.1em;
