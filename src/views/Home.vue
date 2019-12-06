@@ -1,7 +1,20 @@
 <template>
   <div class="home">
-    <h1>Deep diff</h1>
-    <a href="https://www.npmjs.com/packnumber/deep-diff">npmjs.com/deep-diff</a>
+
+    <div style="padding: 16px">
+      <button @click="diffType = 'deep-diff'">Deep diff npm package</button>
+      <button @click="diffType = 'deep-object-diff'">Deep object diff npm package</button>
+    </div>
+
+    <div v-if="diffType === 'deep-diff'">
+      <h1>Deep diff</h1>
+      <a href="https://www.npmjs.com/packnumber/deep-diff">npmjs.com/deep-diff</a>
+    </div>
+
+    <div v-if="diffType === 'deep-object-diff'">
+      <h1>Deep object diff</h1>
+      <a href="https://www.npmjs.com/package/deep-object-diff">npmjs.com/deep-object-diff</a>
+    </div>
 
     <div style="padding: 16px">
       <button @click="setPerson1Data()">Fill Person 1</button>
@@ -78,6 +91,7 @@
             </div>
           </form>
         </div>
+
         <div style="width: 50%; padding: 16px; background-color: rgba(0,0,0,0.05)">
           <code>
             <pre>
@@ -160,10 +174,43 @@
         </div>
       </div>
 
-      <div style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+      <div v-if="diffType === 'deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
         <code>
           <pre>
-{{ myDiff() }}
+{{ deepDiff() }}
+          </pre>
+        </code>
+      </div>
+
+      <div v-if="diffType ===  'deep-object-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+        <code style="margin-bottom: 16px">
+          <h3>diff</h3>
+          <pre>
+{{ diff() }}
+          </pre>
+        </code>
+        <code style="margin-bottom: 16px">
+          <h3>addedDiff</h3>
+          <pre>
+{{ addedDiff() }}
+          </pre>
+        </code>
+        <code style="margin-bottom: 16px">
+          <h3>deletedDiff</h3>
+          <pre>
+{{ deletedDiff() }}
+          </pre>
+        </code>
+        <code style="margin-bottom: 16px">
+          <h3>updatedDiff</h3>
+          <pre>
+{{ updatedDiff() }}
+          </pre>
+        </code>
+        <code style="margin-bottom: 16px">
+          <h3>detailedDiff</h3>
+          <pre>
+{{ detailedDiff() }}
           </pre>
         </code>
       </div>
@@ -174,13 +221,15 @@
 </template>
 
 <script>
-import { diff } from 'deep-diff';
+import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
+import { diff as deepDiff} from 'deep-diff';
 import { def } from './def';
 
 export default {
   name: 'home',
   data: () => ({
     birth: '1989-06-03',
+    diffType: 'deep-object-diff',
     person1: {
       name: '',
       number: 0,
@@ -210,27 +259,42 @@ export default {
   },
   methods: {
     setPerson1Data() {
-      this.person1 = {...def};
+      this.person1 = JSON.parse(JSON.stringify(def));
     },
     setPerson2Data() {
-      this.person2 = {...def};
+      this.person2 = JSON.parse(JSON.stringify(def));
     },
     setData() {
-      this.person1 = {...def};
-      this.person2 = {...def};
+      this.person1 = JSON.parse(JSON.stringify(def));
+      this.person2 = JSON.parse(JSON.stringify(def));
     },
     clearPerson1Data() {
-      this.person1 = {...this.default};
+      this.person1 = JSON.parse(JSON.stringify(this.default));
     },
     clearPerson2Data() {
-      this.person2 = {...this.default};
+      this.person2 = JSON.parse(JSON.stringify(this.default));
     },
     clearData() {
-      this.person1 = {...this.default};
-      this.person2 = {...this.default};
+      this.person1 = JSON.parse(JSON.stringify(this.default));
+      this.person2 = JSON.parse(JSON.stringify(this.default));
     },
-    myDiff() {
+    deepDiff() {
+      return deepDiff(this.person1, this.person2);
+    },
+    diff() {
       return diff(this.person1, this.person2);
+    },
+    addedDiff() {
+      return addedDiff(this.person1, this.person2);
+    },
+    deletedDiff() {
+      return deletedDiff(this.person1, this.person2);
+    },
+    updatedDiff() {
+      return updatedDiff(this.person1, this.person2);
+    },
+    detailedDiff() {
+      return detailedDiff(this.person1, this.person2);
     },
     setBirthdate(person) {
       this[person].birthdate = new Date(this.birth);
