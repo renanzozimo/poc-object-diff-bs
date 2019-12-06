@@ -1,24 +1,24 @@
 <template>
   <div class="home">
 
-    <div style="padding: 16px">
-      <button @click="diffType = 'deep-diff'">Deep diff npm package</button>
-      <button @click="diffType = 'deep-object-diff'">Deep object diff npm package</button>
-      <button @click="diffType = 'return-deep-diff'">Return deep diff npm package</button>
+    <div class="g-button" style="padding: 16px">
+      <button @click="diffType = 'deep-diff'" :class="{'active' : diffType === 'deep-diff'}" >Deep diff npm package</button>
+      <button @click="diffType = 'deep-object-diff'" :class="{'active' : diffType === 'deep-object-diff'}" >Deep object diff npm package</button>
+      <button @click="diffType = 'return-deep-diff'" :class="{'active' : diffType === 'return-deep-diff'}" >Return deep diff npm package</button>
     </div>
 
     <div v-if="diffType === 'deep-diff'">
-      <h1>Deep diff</h1>
+      <h1 style="margin: 0">Deep diff</h1>
       <a href="https://www.npmjs.com/package/deep-diff">npmjs.com/deep-diff</a>
     </div>
 
     <div v-if="diffType === 'deep-object-diff'">
-      <h1>Deep object diff</h1>
+      <h1 style="margin: 0">Deep object diff</h1>
       <a href="https://www.npmjs.com/package/deep-object-diff">npmjs.com/deep-object-diff</a>
     </div>
 
     <div v-if="diffType === 'return-deep-diff'">
-      <h1>Return deep diff</h1>
+      <h1 style="margin: 0">Return deep diff</h1>
       <a href="https://www.npmjs.com/package/return-deep-diff">npmjs.com/return-deep-diff</a>
     </div>
 
@@ -33,8 +33,9 @@
     </div>
 
     <div class="flex" style="margin-top: 32px">
-      <div class="flex">
-        <div style="width: 50%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+      <div class="flex" style="flex-wrap: wrap; background-color: rgba(0,0,0,0.05)">
+        <h3 style="width: 100%; flex-shrink: 0">Person 1</h3>
+        <div style="width: 50%; padding: 16px;">
           <form action>
             <div class="field">
               <label for>Nome</label>
@@ -111,14 +112,15 @@
         <div style="width: 50%; padding: 16px; background-color: rgba(0,0,0,0.05)">
           <code>
             <pre>
-  {{ person1 }}
+{{ person1 }}
             </pre>
           </code>
         </div>
       </div>
 
-      <div class="flex">
-        <div style="width: 50%; padding: 16px; background-color: rgba(0,255,0,0.12)">
+      <div class="flex" style="flex-wrap: wrap; background-color: rgba(0,255,0,0.12)">
+        <h3 style="width: 100%; flex-shrink: 0">Person 1</h3>
+        <div style="width: 50%; padding: 16px;">
           <form action>
             <div class="field">
               <label for>Nome</label>
@@ -194,60 +196,65 @@
         <div style="width: 50%; padding: 16px; background-color: rgba(0,255,0,0.12)">
           <code>
             <pre>
-  {{ person2 }}
+{{ person2 }}
             </pre>
           </code>
         </div>
       </div>
 
-      <div v-if="diffType === 'deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
-        <code>
-          <pre>
+      <div style="width: 35%; padding: 0 16px; background-color: rgba(255,0,0,0.05)">
+        <h3 style="width: 100%; flex-shrink: 0">Diff (using {{ diffType }})</h3>
+        <div v-if="diffType === 'deep-diff'">
+          <code>
+            <pre>
 {{ ddeepDiff() }}
-          </pre>
-        </code>
-      </div>
+            </pre>
+          </code>
+        </div>
 
-      <div v-if="diffType === 'return-deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
-        <code>
-          <pre>
+        <div v-if="diffType === 'return-deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+          <code>
+            <pre>
 {{ deepDiff() }}
-          </pre>
-        </code>
+            </pre>
+          </code>
+        </div>
+
+        <div v-if="diffType ===  'deep-object-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+          <code style="margin-bottom: 16px">
+            <h3>diff</h3>
+            <pre>
+{{ diff() }}
+            </pre>
+          </code>
+          <code style="margin-bottom: 16px">
+            <h3>addedDiff</h3>
+            <pre>
+{{ addedDiff() }}
+            </pre>
+          </code>
+          <code style="margin-bottom: 16px">
+            <h3>deletedDiff</h3>
+            <pre>
+{{ deletedDiff() }}
+            </pre>
+          </code>
+          <code style="margin-bottom: 16px">
+            <h3>updatedDiff</h3>
+            <pre>
+{{ updatedDiff() }}
+            </pre>
+          </code>
+          <code style="margin-bottom: 16px">
+            <h3>detailedDiff</h3>
+            <pre>
+{{ detailedDiff() }}
+            </pre>
+          </code>
+        </div>
+      
       </div>
 
-      <div v-if="diffType ===  'deep-object-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
-        <code style="margin-bottom: 16px">
-          <h3>diff</h3>
-          <pre>
-{{ diff() }}
-          </pre>
-        </code>
-        <code style="margin-bottom: 16px">
-          <h3>addedDiff</h3>
-          <pre>
-{{ addedDiff() }}
-          </pre>
-        </code>
-        <code style="margin-bottom: 16px">
-          <h3>deletedDiff</h3>
-          <pre>
-{{ deletedDiff() }}
-          </pre>
-        </code>
-        <code style="margin-bottom: 16px">
-          <h3>updatedDiff</h3>
-          <pre>
-{{ updatedDiff() }}
-          </pre>
-        </code>
-        <code style="margin-bottom: 16px">
-          <h3>detailedDiff</h3>
-          <pre>
-{{ detailedDiff() }}
-          </pre>
-        </code>
-      </div>
 
     </div>
 
@@ -372,6 +379,48 @@ export default {
 </script>
 
 <style lang="scss">
+
+$color: rgb(56, 0, 102);
+
+  button {
+    padding: 8px 16px;
+    font-size: 13px;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid rgba($color, .1);
+    text-transform: uppercase;
+    font-weight: 600;
+    color: $color;
+    margin-left: 2px;
+    margin-right: 2px;
+    cursor: pointer;
+    transition: all 200ms;
+    outline: 0 none;
+
+    &:hover {
+      background-color: rgba($color, .05)
+    }
+
+    &.active {
+      background-color: $color;
+      color: #fff;
+    }
+  }
+
+  .g-button {
+    button {
+      margin: 0 -1px 0 0;
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: 4px 0 0 4px;
+      }
+      &:last-child {
+        border-radius: 0 4px 4px 0;
+      }
+    }
+  }
+
   body {
     padding: 0;
     margin: 0;
@@ -397,6 +446,7 @@ export default {
 
   .flex {
     display: flex;
+    align-items: flex-start;
   }
 
   .w33p {
@@ -435,7 +485,7 @@ export default {
       bor
 
       &:focus {
-        border-color: rgb(56, 0, 102);
+        border-color: $color;
       }
     }
   }
