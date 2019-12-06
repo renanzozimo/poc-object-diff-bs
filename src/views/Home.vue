@@ -324,7 +324,7 @@ export default {
         {
           name: '',
           age: '18',
-          games: []
+          games: [],
         },
       );
     },
