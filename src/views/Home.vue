@@ -4,6 +4,7 @@
     <div style="padding: 16px">
       <button @click="diffType = 'deep-diff'">Deep diff npm package</button>
       <button @click="diffType = 'deep-object-diff'">Deep object diff npm package</button>
+      <button @click="diffType = 'return-deep-diff'">Return deep diff npm package</button>
     </div>
 
     <div v-if="diffType === 'deep-diff'">
@@ -14,6 +15,11 @@
     <div v-if="diffType === 'deep-object-diff'">
       <h1>Deep object diff</h1>
       <a href="https://www.npmjs.com/package/deep-object-diff">npmjs.com/deep-object-diff</a>
+    </div>
+
+    <div v-if="diffType === 'return-deep-diff'">
+      <h1>Return deep diff</h1>
+      <a href="https://www.npmjs.com/package/return-deep-diff">npmjs.com/return-deep-diff</a>
     </div>
 
     <div style="padding: 16px">
@@ -197,6 +203,14 @@
       <div v-if="diffType === 'deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
         <code>
           <pre>
+{{ ddeepDiff() }}
+          </pre>
+        </code>
+      </div>
+
+      <div v-if="diffType === 'return-deep-diff'" style="width: 35%; padding: 16px; background-color: rgba(0,0,0,0.05)">
+        <code>
+          <pre>
 {{ deepDiff() }}
           </pre>
         </code>
@@ -242,14 +256,15 @@
 
 <script>
 import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
-import { diff as deepDiff} from 'deep-diff';
+import deepDiff from 'return-deep-diff';
+import { diff as ddeepDiff} from 'deep-diff';
 import { def } from './def';
 
 export default {
   name: 'home',
   data: () => ({
     birth: '1989-06-03',
-    diffType: 'deep-diff',
+    diffType: 'return-deep-diff',
     person1: {
       name: '',
       number: '0',
@@ -300,6 +315,9 @@ export default {
     },
     deepDiff() {
       return deepDiff(this.person1, this.person2);
+    },
+    ddeepDiff() {
+      return ddeepDiff(this.person1, this.person2);
     },
     diff() {
       return diff(this.person1, this.person2);
