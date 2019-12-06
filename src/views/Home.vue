@@ -119,7 +119,7 @@
       </div>
 
       <div class="flex" style="flex-wrap: wrap; background-color: rgba(0,255,0,0.12)">
-        <h3 style="width: 100%; flex-shrink: 0">Person 1</h3>
+        <h3 style="width: 100%; flex-shrink: 0">Person 2</h3>
         <div style="width: 50%; padding: 16px;">
           <form action>
             <div class="field">
