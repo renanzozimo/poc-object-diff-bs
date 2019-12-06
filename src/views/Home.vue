@@ -264,7 +264,7 @@ export default {
   name: 'home',
   data: () => ({
     birth: '1989-06-03',
-    diffType: 'return-deep-diff',
+    diffType: 'deep-diff',
     person1: {
       name: '',
       number: '0',
